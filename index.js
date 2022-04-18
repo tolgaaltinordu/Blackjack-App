@@ -105,7 +105,7 @@ function startGame() {
         }
         console.log("firstcard:", firstCard, "second:card", secondCard)
         sum = firstCard + secondCard
-
+        cardsEl.textContent = "Cards: " + firstCard + " " + secondCard
         renderGame()
 
     }
@@ -116,7 +116,7 @@ function startGame() {
 function renderGame() {
 
     sumEl.textContent = "Sum: " + sum
-    cardsEl.textContent = "Cards: " + firstCard + " " + secondCard
+
     if (sum < 21) {
         message = "Do you wanna draw a new card ?"
         messageEl.style.color = "goldenrod"
@@ -153,6 +153,7 @@ function getNewCard() {
     if (isAlive !== false) {
         newCard = getRandomCard()
         sum += parseInt(newCard)
+        cardsEl.textContent += " " + parseInt(newCard)
         console.log("newcard: ", newCard, "sum: ", sum)
         if (newCard.indexOf("s") !== -1) {
             cardT = document.createElement("card-t")
