@@ -1,3 +1,6 @@
+// 201 -211 arası değişecek (newCards geldiğinde Cards taki 11 yazısı 1 olarak değiştirilecek)
+// önceki newcardların bilgileri newCardDeck arrayinde tutuluyor.
+
 let randomCard, firstCard, secondCard, newCard, cardT
 let deck = [
     "1s", "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "10s", "11js", "12qs", "13ks",
@@ -25,12 +28,13 @@ let sumEl = document.querySelector('#sum-el')
 let cardsEl = document.querySelector('#cards-el')
 let element = document.querySelector('.box2')
 document.getElementById("new-card-btn").style.visibility = "hidden"
-
+let newCardDeck = []
 /* Start Game  */
 function startGame() {
     if (isGameStart === false) {  // sadece gamestatr true ise start game buttonu çalşacak
         let startBtn = document.getElementById("start-btn").style.visibility = "hidden"
         document.getElementById("new-card-btn").style.visibility = "visible"
+        document.getElementById('new-card-btn').style.visibility = "visible"
         isAlive = true
         isGameStart = true
         firstCard = getRandomCard()
@@ -99,9 +103,13 @@ function startGame() {
         console.log(firstCard)
         if (firstCard >= 11) {
             firstCard = 10
+        } else if (firstCard === 1) {
+            firstCard = 11
         }
         if (secondCard >= 11) {
             secondCard = 10
+        } else if (secondCard === 1) {
+            secondCard = 11
         }
         console.log("firstcard:", firstCard, "second:card", secondCard)
         sum = firstCard + secondCard
@@ -129,13 +137,30 @@ function renderGame() {
         isAlive = false
         document.getElementById("start-btn").style.visibility = "visible"
         document.getElementById("start-btn").innerText = "PLAY AGAIN"
+        document.getElementById("new-card-btn").style.visibility = "hidden"
+        newCardDeck = []
     } else {
-        message = "You've lost"
-        messageEl.style.color = "darkred"
-        messageEl.textContent = message
-        isAlive = false
-        document.getElementById("start-btn").style.visibility = "visible"
-        document.getElementById("start-btn").innerText = "PLAY AGAIN"
+        if (firstCard === 11) {
+            firstCard = 1
+            sum -= 10
+            sumEl.textContent = "Sum:" + sum
+            cardsEl.textContent = "Cards: " + firstCard + " " + secondCard + " " + newCard
+        } else if (secondCard === 11) {
+            secondCard = 1
+            sum -= 10
+            sumEl.textContent = "Sum:" + sum
+            cardsEl.textContent = "Cards: " + firstCard + " " + secondCard + " " + newCard
+        } else {
+            newCardDeck = []
+            message = "You've lost"
+            messageEl.style.color = "darkred"
+            messageEl.textContent = message
+            isAlive = false
+            document.getElementById("start-btn").style.visibility = "visible"
+            document.getElementById("start-btn").innerText = "PLAY AGAIN"
+            document.getElementById('new-card-btn').style.visibility = "hidden"
+        }
+
     }
 }
 /* Render Game - end */
@@ -149,11 +174,11 @@ function getRandomCard() {
 /* getRandomCard - end */
 
 /* new card */
+
 function getNewCard() {
+
     if (isAlive !== false) {
         newCard = getRandomCard()
-        sum += parseInt(newCard)
-        cardsEl.textContent += " " + parseInt(newCard)
         console.log("newcard: ", newCard, "sum: ", sum)
         if (newCard.indexOf("s") !== -1) {
             cardT = document.createElement("card-t")
@@ -176,6 +201,16 @@ function getNewCard() {
             cardT.setAttribute("rank", parseInt(newCard))
             element.appendChild(cardT)
         }
+        newCard = parseInt(newCard)
+        newCardDeck.push(newCard)
+        if (newCard >= 11) {
+            newCard = 10
+        } else if (sum + 11 <= 21 && newCard === 1) {
+            newCard = 11
+        }
+        sum += newCard
+        cardsEl.textContent += " " + newCard
+        console.log("newCardDeck: ", newCardDeck)
         renderGame()
     }
 
@@ -205,3 +240,5 @@ function playAgain() {
     }
 }
 /* play agian - end */
+
+
