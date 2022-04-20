@@ -1,3 +1,9 @@
+/* start menu */
+function startMenu() {
+    let startMenuContainer = document.getElementById("start-menu-container")
+    startMenuContainer.style.top = "-800px"
+}
+/* start menu end */
 let randomCard, firstCard, secondCard, newCard, cardT
 let deck = [
     "1s", "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "10s", "11js", "12qs", "13ks",
@@ -18,6 +24,7 @@ let isGameStart = false
 let sum = 0
 let hasBlackJack = false
 let isAlive = false
+let newCardPulled = false
 let message = ""
 let messageEl = document.getElementById("message-el")
 let sumEl = document.querySelector('#sum-el')
@@ -37,6 +44,7 @@ function startGame() {
         deck.splice(randomCard, 1)
         secondCard = getRandomCard()
         deck.splice(randomCard, 1)
+
 
         /* first to cards on the table */
         if (noCardsOntheTable === true) {
@@ -124,16 +132,36 @@ function renderGame() {
         document.getElementById("new-card-btn").style.visibility = "hidden"
         newCardDeck = []
     } else {
-        if (firstCard === 11) {
+        if (firstCard === 11 && secondCard !== 11) {
             firstCard = 1
             sum -= 10
-            sumEl.textContent = "Sum:" + sum
-            cardsEl.textContent = "Cards: " + firstCard + " " + secondCard + " " + newCard
-        } else if (secondCard === 11) {
+            sumEl.textContent = "Sum: " + sum
+            cardsEl.textContent = "Cards: " + firstCard + " " + secondCard + " " + newCardDeck[0]
+            for (let i = 1; i <= newCardDeck.length - 1; i++) {
+                cardsEl.textContent += " " + newCardDeck[i]
+            }
+        } else if (secondCard === 11 && firstCard !== 11) {
             secondCard = 1
             sum -= 10
-            sumEl.textContent = "Sum:" + sum
-            cardsEl.textContent = "Cards: " + firstCard + " " + secondCard + " " + newCard
+            sumEl.textContent = "Sum: " + sum
+            cardsEl.textContent = "Cards: " + firstCard + " " + secondCard + " " + newCardDeck[0]
+            for (let i = 1; i <= newCardDeck.length - 1; i++) {
+                cardsEl.textContent += " " + newCardDeck[i]
+            }
+        } else if (firstCard === 11 && secondCard === 11) {
+            secondCard = 1
+            sum -= 10
+            sumEl.textContent = "Sum: " + sum
+            if (newCardPulled === true) {
+                cardsEl.textContent = "Cards: " + firstCard + " " + secondCard + " " + newCardDeck[0]
+            } else {
+                cardsEl.textContent = "Cards: " + firstCard + " " + secondCard
+
+            }
+            for (let i = 1; i <= newCardDeck.length - 1; i++) {
+                cardsEl.textContent += " " + newCardDeck[i]
+            }
+
         } else {
             newCardDeck = []
             message = "You've lost"
@@ -151,7 +179,6 @@ function renderGame() {
 
 /* getRandomCard */
 function getRandomCard() {
-
     // randomCard = Math.floor(Math.random() * 52)
     randomCard = Math.floor(Math.random() * deck.length)
     // console.log("getRandomCard(); ", deck[randomCard])
@@ -164,10 +191,11 @@ function getRandomCard() {
 /* new card */
 
 function getNewCard() {
-
+    newCardPulled = true
     if (isAlive !== false) {
         newCard = getRandomCard()
         deck.splice(randomCard, 1)
+        console.log(deck.length)
         if (newCard.indexOf("s") !== -1) {
             cardT = document.createElement("card-t")
             cardT.setAttribute("suit", "spades")
@@ -196,7 +224,6 @@ function getNewCard() {
         } else if (sum + 11 <= 21 && newCard === 1) {
             newCard = 11
         }
-        newCardDeck.push(newCard)
         sum += newCard
         newCardDeck.push(newCard)
         if (sum > 21 && Boolean(newCardDeck.indexOf(11) === -1) === false) {
@@ -210,8 +237,6 @@ function getNewCard() {
             return renderGame()
         }
         cardsEl.textContent += " " + newCard
-        console.log("getnewcard() sum:", sum)
-        console.log("newCardDeck: ", newCardDeck)
         renderGame()
     }
 
@@ -228,8 +253,15 @@ function playAgain() {
         isGameStart = false
         hasBlackJack = false
         noCardsOntheTable = true
+        newCardPulled = false
         document.getElementById("start-btn").innerText = "START GAME"
         document.getElementById("new-card-btn").style.visibility = "hidden"
+        deck = [
+            "1s", "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "10s", "11js", "12qs", "13ks",
+            "1h", "2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "10h", "11jh", "12qh", "13kh",
+            "1d", "2d", "3d", "4d", "5d", "6d", "7d", "8d", "9d", "10d", "11jd", "12qd", "13kd",
+            "1c", "2c", "3c", "4c", "5c", "6c", "7c", "8c", "9c", "10c", "11jc", "12qc", "13kc"
+        ]
         //remove allchilds
         removeAllChildNodes()
         function removeAllChildNodes(parent) {
@@ -242,10 +274,5 @@ function playAgain() {
 }
 /* play agian - end */
 
-/* start menu */
-function startMenu() {
-    let startMenuContainer = document.getElementById("start-menu-container")
-    startMenuContainer.style.top = "-800px"
-}
-/* start menu end */
+
 
