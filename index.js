@@ -1,5 +1,7 @@
 // 201 -211 arası değişecek (newCards geldiğinde Cards taki 11 yazısı 1 olarak değiştirilecek)
 // önceki newcardların bilgileri newCardDeck arrayinde tutuluyor.
+// oyun başlamadan önce document te Blackjack oyna yazsın
+// Her kart açıldığında desteden bir kart azalaması gerekyior
 
 let randomCard, firstCard, secondCard, newCard, cardT
 let deck = [
@@ -202,14 +204,16 @@ function getNewCard() {
             element.appendChild(cardT)
         }
         newCard = parseInt(newCard)
-        newCardDeck.push(newCard)
+
         if (newCard >= 11) {
             newCard = 10
         } else if (sum + 11 <= 21 && newCard === 1) {
             newCard = 11
         }
+        newCardDeck.push(newCard)
         sum += newCard
         cardsEl.textContent += " " + newCard
+        console.log("getnewcard() sum:", sum)
         console.log("newCardDeck: ", newCardDeck)
         renderGame()
     }
