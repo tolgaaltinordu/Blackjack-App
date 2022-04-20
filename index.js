@@ -1,4 +1,3 @@
-// 201 -211 arası değişecek (newCards geldiğinde Cards taki 11 yazısı 1 olarak değiştirilecek)
 // önceki newcardların bilgileri newCardDeck arrayinde tutuluyor.
 
 let randomCard, firstCard, secondCard, newCard, cardT
@@ -202,15 +201,25 @@ function getNewCard() {
             element.appendChild(cardT)
         }
         newCard = parseInt(newCard)
-        newCardDeck.push(newCard)
+
         if (newCard >= 11) {
             newCard = 10
         } else if (sum + 11 <= 21 && newCard === 1) {
             newCard = 11
         }
         sum += newCard
+        newCardDeck.push(newCard)
+        if (sum > 21 && Boolean(newCardDeck.indexOf(11) === -1) === false) {
+            newCardDeck[newCardDeck.indexOf(11)] = 1
+            sum -= 10
+            sumEl.textContent = "sum: " + sum
+            cardsEl.textContent = "Cards: " + firstCard + " " + secondCard + " " + newCardDeck[0]
+            for (let i = 1; i <= newCardDeck.length - 1; i++) {
+                cardsEl.textContent += " " + newCardDeck[i]
+            }
+            return renderGame()
+        }
         cardsEl.textContent += " " + newCard
-        console.log("newCardDeck: ", newCardDeck)
         renderGame()
     }
 
@@ -240,5 +249,4 @@ function playAgain() {
     }
 }
 /* play agian - end */
-
 
