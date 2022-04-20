@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-// 201 -211 arası değişecek (newCards geldiğinde Cards taki 11 yazısı 1 olarak değiştirilecek)
-// önceki newcardların bilgileri newCardDeck arrayinde tutuluyor.
-// oyun başlamadan önce document te Blackjack oyna yazsın
-// Her kart açıldığında desteden bir kart azalaması gerekyior
-
-=======
->>>>>>> grasshopper
 let randomCard, firstCard, secondCard, newCard, cardT
 let deck = [
     "1s", "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "10s", "11js", "12qs", "13ks",
@@ -218,11 +210,8 @@ function getNewCard() {
             return renderGame()
         }
         cardsEl.textContent += " " + newCard
-<<<<<<< HEAD
         console.log("getnewcard() sum:", sum)
         console.log("newCardDeck: ", newCardDeck)
-=======
->>>>>>> grasshopper
         renderGame()
     }
 
