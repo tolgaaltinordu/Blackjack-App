@@ -35,7 +35,10 @@ function startGame() {
         isAlive = true
         isGameStart = true
         firstCard = getRandomCard()
+        deck.splice(randomCard, 1)
         secondCard = getRandomCard()
+        deck.splice(randomCard, 1)
+
         /* first to cards on the table */
         if (noCardsOntheTable === true) {
             noCardsOntheTable = false
@@ -149,10 +152,14 @@ function renderGame() {
 
 /* getRandomCard */
 function getRandomCard() {
-    randomCard = Math.floor(Math.random() * 52)
+
+    // randomCard = Math.floor(Math.random() * 52)
+    randomCard = Math.floor(Math.random() * deck.length)
     // console.log("getRandomCard(); ", deck[randomCard])
     return deck[randomCard]
+
 }
+
 /* getRandomCard - end */
 
 /* new card */
@@ -161,6 +168,7 @@ function getNewCard() {
 
     if (isAlive !== false) {
         newCard = getRandomCard()
+        deck.splice(randomCard, 1)
         if (newCard.indexOf("s") !== -1) {
             cardT = document.createElement("card-t")
             cardT.setAttribute("suit", "spades")
@@ -238,5 +246,4 @@ function startMenu() {
     startMenuContainer.style.top = "-800px"
 }
 /* start menu end */
-
 
