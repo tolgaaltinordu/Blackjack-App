@@ -83,3 +83,42 @@ img {
 /* [rank="12"] img {
     visibility: visible;
 } */
+
+.start-menu-container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 800px;
+    background: linear-gradient(-45deg, rgb(1, 70, 1), black);
+    left: 0;
+    top: -1px;
+    transition: all .8s ease-in-out;
+
+}
+
+label {
+    margin-top: 10px;
+    background-color: goldenrod;
+    cursor: pointer;
+    font-size: 40px;
+    padding: 5px 25px;
+    border-radius: 4px;
+}
+
+label:hover {
+    background-color: rgb(197, 173, 112);
+}
+
+.play-game {
+    display: none;
+}
+
+@media only screen and (max-width:975.500px) {
+    .start-menu-container {
+        height: 503px;
+
+    }
+}
