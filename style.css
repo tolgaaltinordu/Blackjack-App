@@ -102,6 +102,7 @@ img {
 label {
     margin-top: 10px;
     background-color: goldenrod;
+    border: 1px solid goldenrod;
     cursor: pointer;
     font-size: 40px;
     padding: 5px 25px;
@@ -109,7 +110,8 @@ label {
 }
 
 label:hover {
-    background-color: rgb(197, 173, 112);
+    border: 1px solid black;
+    color: black
 }
 
 .play-game {
