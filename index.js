@@ -1,5 +1,4 @@
-// önceki newcardların bilgileri newCardDeck arrayinde tutuluyor.
-
+// Her kart açıldığında desteden bir kart azalaması gerekyior
 let randomCard, firstCard, secondCard, newCard, cardT
 let deck = [
     "1s", "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "10s", "11js", "12qs", "13ks",
@@ -11,7 +10,6 @@ let player = {
     name: "Grasshopper",
     chips: 50,
     sayHello: function () {
-        console.log("hello")
         document.getElementById('player-el').innerText = player.name + ": " + player.chips + " TL"
     }
 }
@@ -38,56 +36,46 @@ function startGame() {
         isGameStart = true
         firstCard = getRandomCard()
         secondCard = getRandomCard()
-        console.log(firstCard, secondCard)
         /* first to cards on the table */
         if (noCardsOntheTable === true) {
             noCardsOntheTable = false
             for (let i = 0; i < 2; i++) {
-
                 if (i === 0 && firstCard.indexOf("s") !== -1) {
-
                     let cardT = document.createElement("card-t")
                     cardT.setAttribute("suit", "spades")
                     cardT.setAttribute("rank", parseInt(firstCard))
                     element.appendChild(cardT)
                 } else if (i === 0 && firstCard.indexOf("h") !== -1) {
-
                     let cardT = document.createElement("card-t")
                     cardT.setAttribute("suit", "hearts")
                     cardT.setAttribute("rank", parseInt(firstCard))
                     element.appendChild(cardT)
                 } else if (i === 0 && firstCard.indexOf("d") !== -1) {
-
                     let cardT = document.createElement("card-t")
                     cardT.setAttribute("suit", "diamonds")
                     cardT.setAttribute("rank", parseInt(firstCard))
                     element.appendChild(cardT)
                 } else if (i === 0 && firstCard.indexOf("c") !== -1) {
-
                     let cardT = document.createElement("card-t")
                     cardT.setAttribute("suit", "clubs")
                     cardT.setAttribute("rank", parseInt(firstCard))
                     element.appendChild(cardT)
                 } else if (i === 1 && secondCard.indexOf("s") !== -1) {
-
                     let cardT = document.createElement("card-t")
                     cardT.setAttribute("suit", "spades")
                     cardT.setAttribute("rank", parseInt(secondCard))
                     element.appendChild(cardT)
                 } else if (i === 1 && secondCard.indexOf("h") !== -1) {
-
                     let cardT = document.createElement("card-t")
                     cardT.setAttribute("suit", "hearts")
                     cardT.setAttribute("rank", parseInt(secondCard))
                     element.appendChild(cardT)
                 } else if (i === 1 && secondCard.indexOf("d") !== -1) {
-
                     let cardT = document.createElement("card-t")
                     cardT.setAttribute("suit", "diamonds")
                     cardT.setAttribute("rank", parseInt(secondCard))
                     element.appendChild(cardT)
                 } else if (i === 1 && secondCard.indexOf("c") !== -1) {
-
                     let cardT = document.createElement("card-t")
                     cardT.setAttribute("suit", "clubs")
                     cardT.setAttribute("rank", parseInt(secondCard))
@@ -98,8 +86,6 @@ function startGame() {
         /* first to cards on the table - end */
         firstCard = parseInt(firstCard)
         secondCard = parseInt(secondCard)
-        console.log(secondCard)
-        console.log(firstCard)
         if (firstCard >= 11) {
             firstCard = 10
         } else if (firstCard === 1) {
@@ -110,7 +96,6 @@ function startGame() {
         } else if (secondCard === 1) {
             secondCard = 11
         }
-        console.log("firstcard:", firstCard, "second:card", secondCard)
         sum = firstCard + secondCard
         cardsEl.textContent = "Cards: " + firstCard + " " + secondCard
         renderGame()
@@ -121,9 +106,7 @@ function startGame() {
 
 /* Render Game */
 function renderGame() {
-
     sumEl.textContent = "Sum: " + sum
-
     if (sum < 21) {
         message = "Do you wanna draw a new card ?"
         messageEl.style.color = "goldenrod"
@@ -167,7 +150,7 @@ function renderGame() {
 /* getRandomCard */
 function getRandomCard() {
     randomCard = Math.floor(Math.random() * 52)
-    console.log("getRandomCard(); ", deck[randomCard])
+    // console.log("getRandomCard(); ", deck[randomCard])
     return deck[randomCard]
 }
 /* getRandomCard - end */
@@ -178,7 +161,6 @@ function getNewCard() {
 
     if (isAlive !== false) {
         newCard = getRandomCard()
-        console.log("newcard: ", newCard, "sum: ", sum)
         if (newCard.indexOf("s") !== -1) {
             cardT = document.createElement("card-t")
             cardT.setAttribute("suit", "spades")
@@ -249,4 +231,12 @@ function playAgain() {
     }
 }
 /* play agian - end */
+
+/* start menu */
+function startMenu() {
+    let startMenuContainer = document.getElementById("start-menu-container")
+    startMenuContainer.style.top = "-800px"
+}
+/* start menu end */
+
 
