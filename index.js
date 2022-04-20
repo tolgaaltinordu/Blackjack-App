@@ -1,4 +1,3 @@
-// Her kart açıldığında desteden bir kart azalaması gerekyior
 let randomCard, firstCard, secondCard, newCard, cardT
 let deck = [
     "1s", "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "10s", "11js", "12qs", "13ks",
