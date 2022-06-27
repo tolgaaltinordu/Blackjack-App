@@ -1,7 +1,7 @@
 /* start menu */
 function startMenu() {
     let startMenuContainer = document.getElementById("start-menu-container")
-    startMenuContainer.style.top = "-800px"
+    startMenuContainer.style.top = "-1100px"
 }
 /* start menu end */
 let randomCard, firstCard, secondCard, newCard, cardT

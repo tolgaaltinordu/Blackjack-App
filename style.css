@@ -9,6 +9,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     text-align: center;
+    height: 100vh;
 }
 
 #message-el {
@@ -91,7 +92,7 @@ img {
     align-items: center;
     flex-direction: column;
     width: 100%;
-    height: 800px;
+    height: 100vh;
     background: linear-gradient(-45deg, rgb(1, 70, 1), black);
     left: 0;
     top: -1px;
